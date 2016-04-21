@@ -6,13 +6,14 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CheckParametrs;
 
 namespace BookClass
 {
     /// <summary>
     /// Class for describing book
     /// </summary>
-    public class Book : IEquatable<Book>, IComparable<Book>
+    public class Book : Check, IEquatable<Book>, IComparable<Book>
     {
         #region Properties
         public string Name { get; private set; }
@@ -30,12 +31,12 @@ namespace BookClass
         /// <param name="author">Author of the book</param>
         /// <param name="pages">Number of pages</param>
         /// <param name="year">Realeased</param>
-        public Book(string name, string author, int pages, int year)
+        public Book(string author, string name, int pages, int year)
         {
-            if (name == null || author == null)
-                throw new ArgumentNullException();
-            if(pages <= 0 || (year <= 700 && year > DateTime.Today.Year))
-                throw new AggregateException();
+            CheckRefOnNull(name);
+            CheckRefOnNull(author);
+            if (pages <= 0 || (year <= 700 && year > DateTime.Today.Year))
+                throw new ArgumentException();
             Name = name;
             Author = author;
             Pages = pages;
@@ -64,6 +65,7 @@ namespace BookClass
         /// <returns>Int32</returns>
         public int CompareTo(Book other)
         {
+            CheckRefOnNull(other);
             return Name.CompareTo(other.Name);
         }
 
@@ -83,8 +85,7 @@ namespace BookClass
         /// <returns>True if books are equal</returns>
         public bool Equals(Book other)
         {
-            if(other == null)
-                throw new ArgumentNullException();
+            CheckRefOnNull(other);
             if (Name == other.Name && Author == other.Author && Pages == other.Pages && Year == other.Year)
                 return true;
             return false;
@@ -97,8 +98,8 @@ namespace BookClass
         /// <returns>True if books are equal</returns>
         public override bool Equals(Object obj)
         {
-            if (obj == null || this == null)
-                return false;
+            CheckRefOnNull(obj);
+            CheckRefOnNull(this);
 
             Book book = obj as Book;
             if (book == null)
@@ -116,8 +117,8 @@ namespace BookClass
 
         public static bool operator ==(Book book1, Book book2)
         {
-            if(book1 == null || book2 == null)
-                throw new ArgumentNullException();
+            CheckRefOnNull(book1);
+            CheckRefOnNull(book2);
             return book1.Equals(book2);
         }
 

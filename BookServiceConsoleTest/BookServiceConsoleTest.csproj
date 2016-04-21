@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{366EB0C1-F975-44D1-8038-B4367D0C241C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{329546B8-AD0A-4C8E-B859-95F910CEF400}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BookClass</RootNamespace>
-    <AssemblyName>BookClass</AssemblyName>
+    <RootNamespace>BookServiceConsoleTest</RootNamespace>
+    <AssemblyName>BookServiceConsoleTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,13 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Book.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BinaryFileBookRepository\BinaryFileBookRepository.csproj">
+      <Project>{32bca18c-e54a-4141-afa0-a8d66044110b}</Project>
+      <Name>BinaryFileBookRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookClass\BookClass.csproj">
+      <Project>{366eb0c1-f975-44d1-8038-b4367d0c241c}</Project>
+      <Name>BookClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookRepositoryInterface\BookRepositoryInterface.csproj">
+      <Project>{a8138b41-e7b7-4088-9842-893297cd84a2}</Project>
+      <Name>BookRepositoryInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CheckParametrs\CheckParametrs.csproj">
       <Project>{ba756a82-7361-4364-9b5a-6b581b2f1b47}</Project>
       <Name>CheckParametrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkWithBooks\WorkWithBooks.csproj">
+      <Project>{4a011403-b349-4edb-900f-fb080e8f6907}</Project>
+      <Name>WorkWithBooks</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
